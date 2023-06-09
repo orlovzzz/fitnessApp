@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders History</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+</head>
+<body>
+<div style="padding: 30px;">
+<a class="logout-link" href="/home">Home Page</a>
+<br><br><br><br>
+
+<h1>Orders History</h1>
+
+<div th:if="${orders.isEmpty()}">
+    <p>No orders available.</p>
+</div>
+
+<div th:each="order : ${orders}">
+    <br><br>
+    <h3>Order ID: <span th:text="${order.id}"></span></h3>
+
+    <h4>Order Items:</h4>
+    <table>
+        <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${order.products}">
+            <td th:text="${product.product} + ' -  '"></td>
+            <td th:text="${product.price} + 'RUB'"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</body>
+</html>

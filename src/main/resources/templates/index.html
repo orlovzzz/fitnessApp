@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Fitness Page</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <meta charset="UTF-8">
+    <script src="script/script.js"></script>
+</head>
+<body>
+<header>
+    <div class="header-left">
+        <button class="account-button" onclick="showAccountModal()">Account</button>
+        <a class="logout-link" href="/ordersHistory" style="margin-left: 230px;">Orders History</a>
+    </div>
+    <div class="header-center" style="padding-right: 85px;">
+        <h1>FITNESS</h1>
+    </div>
+    <div class="header-right">
+        <a class="logout-link" href="/order" style="margin-right: 230px;">Order</a>
+        <a href="/" class="logout-link">Exit</a>
+    </div>
+</header>
+<div id="accountModal" class="modal">
+    <h2>Account Information</h2>
+    <br>
+    <h3>Name: <span th:text="${username}"></span></h3>
+    <br>
+    <h3><span th:text="${subscription}"></span></h3>
+    <br>
+    <h3>Coach: <span th:text="${coach}"></span></h3>
+    <br>
+    <h3>Balance: <span th:text="${balance}"></span></h3>
+    <button onclick="showBalanceModal()">Top up your balance</button>
+    <div class="modal" id="balanceModal">
+        <form method="post" action="/cashIn">
+            <label for="balance">Enter the amount: </label>
+            <input style="border: 2px solid black;" type="text" id="balance" name="balance" required>
+            <input type="submit" value="Cash in">
+        </form>
+    </div>
+    <br>
+    <br>
+    <button onclick="hideAccountModal()">Close</button>
+    <br>
+</div>
+
+<div class="subscription-block">
+    <h3>GET SUBSCRIPTION</h3><br>
+    <div class="subscription-option">
+        <h3>1 month <br> 4000RUB</h3>
+        <form method="get" action="/oneMouth">
+            <input class="subinput" type="submit" value="Order">
+        </form>
+        <div th:if="${error1}" style="color: red" th:text="${error1}"></div>
+    </div>
+    <div class="subscription-option">
+        <h3>3 months <br> 110000RUB</h3>
+        <form method="get" action="/threeMouth">
+            <input class="subinput" type="submit" value="Order">
+        </form>
+        <div th:if="${error2}" style="color: red" th:text="${error2}"></div>
+    </div>
+    <div class="subscription-option">
+        <h3>6 months <br> 20000RUB</h3>
+        <form method="get" action="/sixMouth">
+            <input class="subinput" type="submit" value="Order">
+        </form>
+        <div th:if="${error3}" style="color: red" th:text="${error3}"></div>
+    </div>
+    <div class="subscription-option">
+        <h3>12 months <br> 40000RUB</h3>
+        <form method="get" action="/oneYear">
+            <input class="subinput" type="submit" value="Order">
+        </form>
+        <div th:if="${error4}" style="color: red" th:text="${error4}"></div>
+    </div>
+</div>
+
+<div style="text-align: center; padding: 10px;">
+    <h2>SELECT A COACH</h2>
+    <div th:if="${error5}" style="color: red" th:text="${error5}"></div>
+    <div id="centerCoach">
+        <div class="coach-container">
+            <div class="coach-block">
+                <h3>Coach 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo magna nec eros venenatis, vel gravida nisi lacinia.</p>
+                <form method="post" action="/selectCoach">
+                    <input type="hidden" name="coach" value="Coach 1">
+                    <input class="subinput" type="submit" value="Select">
+                </form>
+            </div>
+            <div class="coach-block">
+                <h3>Coach 2</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo magna nec eros venenatis, vel gravida nisi lacinia.</p>
+                <form method="post" action="/selectCoach">
+                    <input type="hidden" name="coach" value="Coach 2">
+                    <input class="subinput" type="submit" value="Select">
+                </form>
+            </div>
+            <div class="coach-block">
+                <h3>Coach 3</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo magna nec eros venenatis, vel gravida nisi lacinia.</p>
+                <form method="post" action="/selectCoach">
+                    <input type="hidden" name="coach" value="Coach 3">
+                    <input class="subinput" type="submit" value="Select">
+                </form>
+            </div>
+            <div class="coach-block">
+                <h3>Coach 4</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo magna nec eros venenatis, vel gravida nisi lacinia.</p>
+                <form method="post" action="/selectCoach">
+                    <input type="hidden" name="coach" value="Coach 4">
+                    <input class="subinput" type="submit" value="Select">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="shop" style="text-align: center; padding: 10px;">
+    <h2>SPORTS NUTRITION</h2>
+    <div class="shop-container">
+        <div class="shop-block">
+                <h3>Product 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo magna nec eros venenatis, vel gravida nisi lacinia.</p>
+            <h3>100RUB</h3>
+            <form method="post" action="/addToOrder">
+                <input type="hidden" name="product" value="1">
+                <input class="subinput" type="submit" value="Add to order">
+            </form>
+        </div>
+        <div class="shop-block">
+                <h3>Product 2</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo magna nec eros venenatis, vel gravida nisi lacinia.</p>
+            <h3>500RUB</h3>
+            <form method="post" action="/addToOrder">
+                <input type="hidden" name="product" value="2">
+                <input class="subinput" type="submit" value="Add to order">
+            </form>
+        </div>
+        <div class="shop-block">
+                <h3>Product 3</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo magna nec eros venenatis, vel gravida nisi lacinia.</p>
+            <h3>1200RUB</h3>
+            <form method="post" action="/addToOrder">
+                <input type="hidden" name="product" value="3">
+                <input class="subinput" type="submit" value="Add to order">
+            </form>
+        </div>
+        <div class="shop-block">
+                <h3>Product 4</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo magna nec eros venenatis, vel gravida nisi lacinia.</p>
+                <h3>2500RUB</h3>
+            <form method="post" action="/addToOrder">
+                <input type="hidden" name="product" value="4">
+                <input class="subinput" type="submit" value="Add to order">
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="overlay" class="overlay"></div>
+</body>
+</html>
